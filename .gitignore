@@ -1,3 +1,8 @@
 # Python
 .venv/
 __pycache__/
+#data
+data/*
+data/raw/*
+data/processed/*
+*.csv
