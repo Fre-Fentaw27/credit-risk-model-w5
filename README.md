@@ -202,8 +202,27 @@ Upon successful execution, the script will create or update the `data/processed/
 
 The pipeline generates log files (`pipeline_run.log`, `data_ingestion.log`, `feature_engineering.log`) in the project root directory, providing detailed information on the execution flow, warnings, and any errors encountered.
 
-### **Next Steps**
+## Task 4: Proxy Target Variable Engineering
 
-- [ ] Define the **exact proxy variable** (e.g., "90-day delinquency equivalent").
-- [ ] Conduct **feature analysis** on eCommerce data.
-- [ ] Build and validate both model types.
+![Risk Cluster Visualization](data/processed/image.png)
+Creates a `is_high_risk` label by analyzing customer transaction patterns using RFM (Recency, Frequency, Monetary) analysis and K-Means clustering.
+
+### Key Features
+
+- 🎯 **Automatic Risk Labeling**: Identifies high-risk customers programmatically
+- 📊 **RFM Metrics Calculation**:
+  - Recency: Days since last transaction
+  - Frequency: Transaction count
+  - Monetary: Total/average transaction amounts
+- 🧩 **Smart Clustering**: Uses K-Means to segment customers into 3 risk groups
+- 🔄 **Seamless Integration**: Merges labels back with processed features
+
+### How It Works
+
+```python
+from src.target_engineering import add_target_variable
+
+# Input: processed_features.csv and raw transaction data
+final_data = add_target_variable(processed_features, transactions)
+final_data.to_csv("data_with_target.csv")  # Now contains is_high_risk column
+```
