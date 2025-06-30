@@ -130,6 +130,78 @@ The eCommerce dataset lacks a direct **"default" label** (unlike traditional ban
 
 ---
 
+# Task-3: Feature Enginnering
+
+## Overview
+
+The pipeline is split into two main Python files:
+
+1.  **`src/data_processing.py`**:
+
+    - Responsible for loading the raw `data.csv` file.
+    - Performs initial data validation and datetime conversions.
+    - Initiates and runs the feature engineering pipeline defined in `feature_engineering.py`.
+    - Saves the final processed dataset and the trained pipeline model.
+
+2.  **`src/feature_engineering.py`**:
+    - Contains custom Scikit-learn-compatible transformers:
+      - `AggregateFeaturesAdder`: Adds customer-level aggregate features (e.g., total amount, transaction count).
+      - `DatetimeFeaturesExtractor`: Extracts temporal features (hour, day, month, year) from transaction timestamps.
+      - `ColumnTransformerDataFrameOutput`: A utility to ensure `ColumnTransformer` outputs a Pandas DataFrame with proper column names.
+    - Defines the complete `sklearn.pipeline.Pipeline` that combines these custom transformers with standard preprocessing steps like imputation (`KNNImputer`, `SimpleImputer`), scaling (`StandardScaler`), and encoding (`OneHotEncoder`, `OrdinalEncoder`).
+
+## Setup
+
+1.  **Clone the repository** (if applicable) or ensure you have the project structure locally.
+2.  **Navigate to the project root directory** in your terminal.
+3.  **Create a virtual environment** (recommended):
+    ```bash
+    python -m venv .venv
+    ```
+4.  **Activate the virtual environment**:
+    - On Windows:
+      ```bash
+      .venv\Scripts\activate
+      ```
+    - On macOS/Linux:
+      ```bash
+      source .venv/bin/activate
+      ```
+5.  **Install dependencies**:
+    This project relies on `pandas`, `scikit-learn`, and `xverse`. Due to known compatibility issues with `xverse` and newer `pandas` versions, a specific `pandas` version is recommended.
+    ```bash
+    pip install scikit-learn==1.3.0 pandas==1.5.3 xverse
+    ```
+    _(Note: `scikit-learn==1.3.0` is generally compatible with `pandas==1.5.3`.)_
+
+## Usage
+
+1.  **Place your raw data file** named `data.csv` into the `data/raw/` directory.
+
+2.  **Run the data processing pipeline**:
+    Navigate to the project root and execute the `data_processing.py` script:
+
+    ```bash
+    python src/data_processing.py
+    ```
+
+    You can also specify custom input/output paths using command-line arguments:
+
+    ```bash
+    python src/data_processing.py --input data/raw/my_custom_data.csv --output-features data/processed/my_features.csv --output-pipeline data/processed/my_pipeline.pkl
+    ```
+
+## Outputs
+
+Upon successful execution, the script will create or update the `data/processed/` directory with the following files:
+
+- **`processed_features.csv`**: The transformed dataset containing all engineered features, ready for model training. This file will include the original `CustomerId` and `FraudResult` columns.
+- **`feature_pipeline.pkl`**: A pickled (serialized) version of the complete Scikit-learn pipeline. This allows you to easily reuse the exact same preprocessing steps on new, unseen data (e.g., during prediction) without retraining the pipeline.
+
+## Logging
+
+The pipeline generates log files (`pipeline_run.log`, `data_ingestion.log`, `feature_engineering.log`) in the project root directory, providing detailed information on the execution flow, warnings, and any errors encountered.
+
 ### **Next Steps**
 
 - [ ] Define the **exact proxy variable** (e.g., "90-day delinquency equivalent").

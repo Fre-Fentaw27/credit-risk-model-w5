@@ -1,0 +1,18 @@
+2025-06-30 11:44:06,682 - __main__ - INFO - Loading data from D:\AI-projects\credit-risk-model-w5\data\raw\data.csv
+2025-06-30 11:44:07,108 - __main__ - INFO - Loaded 95662 records
+2025-06-30 11:44:07,109 - __main__ - INFO - Data columns: TransactionId, BatchId, AccountId, SubscriptionId, CustomerId, CurrencyCode, CountryCode, ProviderId, ProductId, ProductCategory, ChannelId, Amount, Value, TransactionStartTime, PricingStrategy, FraudResult
+2025-06-30 11:44:07,257 - __main__ - INFO - Building feature engineering pipeline...
+2025-06-30 11:44:07,258 - __main__ - INFO - Transforming data...
+2025-06-30 11:44:07,258 - feature_engineering - INFO - Adding aggregate features for column 'Amount' grouped by 'CustomerId'...
+2025-06-30 11:44:07,325 - feature_engineering - INFO - Extracting datetime features from 'TransactionStartTime'...
+2025-06-30 11:44:07,811 - __main__ - INFO - Processed features shape: (95662, 34)
+2025-06-30 11:44:07,812 - __main__ - INFO - Sample processed data:
+2025-06-30 11:44:07,812 - __main__ - INFO -         CustomerId  FraudResult    Amount  ...  ProviderId_ProviderId_6  CountryCode_256  CurrencyCode_UGX
+0  CustomerId_4406            0 -0.046371  ...                      1.0              1.0               1.0
+1  CustomerId_4406            0 -0.054643  ...                      0.0              1.0               1.0
+2  CustomerId_4683            0 -0.050426  ...                      1.0              1.0               1.0
+
+[3 rows x 34 columns]
+2025-06-30 11:44:07,853 - __main__ - INFO - Saving processed data to D:\AI-projects\credit-risk-model-w5\data\processed\processed_features.csv
+2025-06-30 11:44:10,246 - __main__ - INFO - Saving pipeline to D:\AI-projects\credit-risk-model-w5\data\processed\feature_pipeline.pkl
+2025-06-30 11:44:10,255 - __main__ - INFO - Feature engineering pipeline completed successfully!
