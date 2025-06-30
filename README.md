@@ -204,7 +204,7 @@ The pipeline generates log files (`pipeline_run.log`, `data_ingestion.log`, `fea
 
 ## Task 4: Proxy Target Variable Engineering
 
-![Risk Cluster Visualization](../data/processed/image.png)
+![Risk Cluster Visualization](image.png)
 Creates a `is_high_risk` label by analyzing customer transaction patterns using RFM (Recency, Frequency, Monetary) analysis and K-Means clustering.
 
 ### Key Features
