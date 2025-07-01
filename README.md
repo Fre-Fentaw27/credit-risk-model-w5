@@ -226,3 +226,73 @@ from src.target_engineering import add_target_variable
 final_data = add_target_variable(processed_features, transactions)
 final_data.to_csv("data_with_target.csv")  # Now contains is_high_risk column
 ```
+
+# Task 5: Model Training & Evaluation
+
+## Overview
+
+This task focuses on training machine learning models to predict credit risk, evaluating their performance, and registering the best model in MLflow's Model Registry.
+
+## Key Components
+
+### 1. Model Training Pipeline
+
+- Implements two classification models:
+  - Logistic Regression
+  - Random Forest
+- Uses GridSearchCV for hyperparameter tuning
+- Evaluates models using multiple metrics:
+  - Accuracy, Precision, Recall
+  - F1 Score, ROC AUC
+
+### 2. MLflow Integration
+
+- Tracks all experiments with:
+  - Parameters
+  - Metrics
+  - Model artifacts
+- Model Registry implementation:
+  - Automatically registers trained models
+  - Promotes best model to Production
+  - Archives previous production versions
+
+### 3. Testing Framework
+
+- Unit tests for:
+  - Data loading functionality
+  - Data preprocessing
+- Test features:
+  - File existence validation
+  - Required column checks
+  - Train-test splitting logic
+    ![Running Tests](image-1.png)
+
+## How to Run
+
+### Prerequisites
+
+- MLflow server running (local SQLite backend)
+- Processed data from Task 4 (`data/processed/data_with_target.csv`)
+
+### Installation
+
+```bash
+# Clone repository
+git clone [your-repo-url]
+cd credit-risk-model-w5
+
+# Create virtual environment
+python -m venv .venv
+source .venv/bin/activate  # Linux/Mac
+.venv\Scripts\activate     # Windows
+
+# Install dependencies
+pip install -r requirements.txt
+# Running the Training
+python src/train.py
+# Viewing Results
+mlflow ui --backend-store-uri sqlite:///mlflow.db
+Access MLflow UI at:http://127.0.0.1:5000
+# Running Tests
+python -m pytest tests/test_data_processing_models_t5.py -v
+```

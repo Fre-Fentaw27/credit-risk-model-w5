@@ -6,3 +6,5 @@ scikit-learn
 xverse
 numpy 
 joblib 
+pytest
+mlflow
