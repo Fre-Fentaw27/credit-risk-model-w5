@@ -19,4 +19,4 @@ model_size_bytes: 4054963
 model_uuid: m-444db329f3f644079165b9326f71cecc
 prompts: null
 run_id: f0f76320e085403da8bcc54f9f542254
-utc_time_created: '2025-07-01 07:30:21.615283'
+utc_time_created: "2025-07-01 07:30:21.615283"

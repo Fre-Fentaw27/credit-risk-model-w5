@@ -296,3 +296,36 @@ Access MLflow UI at:http://127.0.0.1:5000
 # Running Tests
 python -m pytest tests/test_data_processing_models_t5.py -v
 ```
+
+# Credit Risk Modeling - Task 6
+
+## Model Deployment and Continuous Integration
+
+### Overview
+
+This task focuses on:  
+✅ Packaging the trained model as a containerized API  
+✅ Implementing request/response validation  
+✅ Setting up CI/CD pipelines  
+✅ Ensuring code quality through linting and testing
+![Running src/api/main.py](image-3.png)
+
+---
+
+## API Endpoints
+
+| Endpoint   | Method | Description          | Request Body                | Response                                                     |
+| ---------- | ------ | -------------------- | --------------------------- | ------------------------------------------------------------ |
+| `/health`  | GET    | Service health check | -                           | `{"status": "healthy", "model": "CreditRisk_Random_Forest"}` |
+| `/predict` | POST   | Get risk prediction  | [Features](#request-format) | [Prediction](#response-format)                               |
+
+### Request Format
+
+```json
+{
+  "credit_score": 650,
+  "income": 50000.0,
+  "loan_amount": 10000.0,
+  "debt_to_income": 0.35
+}
+```
