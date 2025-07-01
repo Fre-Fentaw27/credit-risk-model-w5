@@ -308,7 +308,6 @@ This task focuses on:
 ✅ Implementing request/response validation  
 ✅ Setting up CI/CD pipelines  
 ✅ Ensuring code quality through linting and testing
-![Running src/api/main.py](image-2.png)
 
 ---
 
